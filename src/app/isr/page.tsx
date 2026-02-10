@@ -1,11 +1,38 @@
 export const revalidate = 10;
 
-export default function ISRPage() {
-  return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-purple-50 py-16">
-      <h2 className="text-3xl font-bold mb-4 text-purple-700">ISR (Incremental Static Regeneration)</h2>
-      <p className="mb-4 text-lg text-purple-900">Ta strona jest regenerowana co 10 sekund na serwerze.</p>
-      <p className="text-purple-800">Aktualny czas (build/regeneration): <b>{new Date().toLocaleString()}</b></p>
-    </div>
-  );
+import ISRClient from "./isrClient";
+
+// Pokazuje wyraźnie działanie revalidate: ten sam obrazek i dane przez 10 sekund, potem nowe
+const NAMES = [
+  "Rick Sanchez",
+  "Morty Smith",
+  "Summer Smith",
+  "Beth Smith",
+  "Jerry Smith"
+];
+
+export default async function ISRPage() {
+  // Losuj imię tylko raz na regenerację strony
+  const name = NAMES[Math.floor(Math.random() * NAMES.length)];
+  let image = "";
+  let author = "";
+  let buildTime = new Date().toLocaleString();
+  let error = false;
+  try {
+    const res = await fetch(`https://rickandmortyapi.com/api/character/?name=${encodeURIComponent(name)}`);
+    const data = await res.json();
+    if (data.results && data.results[0]) {
+      image = data.results[0].image;
+      author = data.results[0].name;
+    } else {
+      image = "https://placehold.co/200x200?text=Brak+obrazka";
+      author = "Brak postaci";
+      error = true;
+    }
+  } catch (e) {
+    image = "https://placehold.co/200x200?text=Błąd+API";
+    author = "Błąd pobierania";
+    error = true;
+  }
+  return <ISRClient image={image} author={author} buildTime={buildTime} error={error} name={name} />;
 }

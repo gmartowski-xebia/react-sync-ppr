@@ -5,7 +5,6 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["rickandmortyapi.com"],
   },
-  cacheComponents: true,
   reactCompiler: true,
 };
 

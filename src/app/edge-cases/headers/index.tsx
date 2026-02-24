@@ -2,6 +2,7 @@ import CountryPanelBad from "./bad";
 import CountryPanelGood from "./good";
 import fs from "fs";
 import path from "path";
+import { Suspense } from "react";
 
 export default async function HeadersEdgeCasePage() {
   const explanation = fs.readFileSync(path.join(process.cwd(), "src/app/edge-cases/headers/explanation.md"), "utf8");
@@ -12,10 +13,14 @@ export default async function HeadersEdgeCasePage() {
       <div dangerouslySetInnerHTML={{ __html: explanation.replace(/\n/g, "<br>") }} />
       <hr />
       <h3>Błędny przykład (cache globalny):</h3>
-      <CountryPanelBad />
+      <Suspense fallback={<div>Ładowanie...</div>}>
+        <CountryPanelBad />
+      </Suspense>
       <hr />
       <h3>Poprawny przykład (dynamiczne headers):</h3>
-      <CountryPanelGood />
+      <Suspense fallback={<div>Ładowanie...</div>}>
+        <CountryPanelGood />
+      </Suspense>
       <hr />
       <HeaderChanger />
     </div>
@@ -32,4 +37,3 @@ function HeaderChanger() {
     </form>
   );
 }
-

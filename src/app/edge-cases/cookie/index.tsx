@@ -3,6 +3,7 @@ import UserPanelGood from "./good";
 import fs from "fs";
 import path from "path";
 import { cookies } from "next/headers";
+import { Suspense } from "react";
 
 export default async function CookieEdgeCasePage() {
   // Wyjaśnienie
@@ -17,10 +18,14 @@ export default async function CookieEdgeCasePage() {
       <div dangerouslySetInnerHTML={{ __html: explanation.replace(/\n/g, "<br>") }} />
       <hr />
       <h3>Błędny przykład (globalny cache):</h3>
-      <UserPanelBad />
+      <Suspense fallback={<div>Ładowanie...</div>}>
+        <UserPanelBad />
+      </Suspense>
       <hr />
       <h3>Poprawny przykład (dynamiczne cookies):</h3>
-      <UserPanelGood />
+      <Suspense fallback={<div>Ładowanie...</div>}>
+        <UserPanelGood />
+      </Suspense>
       <hr />
       <CookieChanger />
     </div>
@@ -37,4 +42,3 @@ function CookieChanger() {
     </form>
   );
 }
-

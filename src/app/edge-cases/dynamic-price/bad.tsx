@@ -2,7 +2,7 @@
 let price = 100;
 
 export async function ProductBad() {
-  "use cache";
+  // "use cache";
   return <div>Cena produktu (cache): {price} zł</div>;
 }
 

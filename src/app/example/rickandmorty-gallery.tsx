@@ -3,12 +3,13 @@ import Image from "next/image";
 async function getCharacters() {
   const res = await fetch("https://rickandmortyapi.com/api/character/?page=1");
   const data = await res.json();
-  await new Promise((resolve) => setTimeout(resolve, 2000));
   return data.results.slice(0, 6);
 }
 
 export default async function RickAndMortyGallery() {
+
   const characters = await getCharacters();
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
       {characters.map((char: any) => (

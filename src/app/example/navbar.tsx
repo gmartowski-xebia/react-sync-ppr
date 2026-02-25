@@ -1,6 +1,4 @@
-"use client";
-
-import {DetailsCount} from "@/app/example/details-count";
+import DetailsCount from "@/app/example/details-count";
 import {Suspense} from "react";
 
 export default function Navbar() {

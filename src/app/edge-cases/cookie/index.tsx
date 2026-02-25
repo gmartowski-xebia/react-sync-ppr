@@ -2,15 +2,11 @@ import UserPanelBad from "./bad";
 import UserPanelGood from "./good";
 import fs from "fs";
 import path from "path";
-import { cookies } from "next/headers";
 import { Suspense } from "react";
 
 export default async function CookieEdgeCasePage() {
   // Wyjaśnienie
   const explanation = fs.readFileSync(path.join(process.cwd(), "src/app/edge-cases/cookie/explanation.md"), "utf8");
-
-  // Interaktywność: zmiana cookie przez UI
-  // (w Next.js 16 można użyć API route do ustawiania cookies)
 
   return (
     <div style={{ padding: 24 }}>

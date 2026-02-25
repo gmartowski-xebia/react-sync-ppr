@@ -1,4 +1,4 @@
-import { FaCookieBite, FaMoneyBillWave, FaGlobeEurope, FaTag, FaSyncAlt, FaUserSecret, FaExclamationTriangle } from "react-icons/fa";
+import { FaCookieBite, FaMoneyBillWave, FaUserSecret } from "react-icons/fa";
 import Link from "next/link";
 import { Suspense } from "react";
 import CopyrightYear from "./CopyrightYear";
@@ -9,23 +9,24 @@ const edgeCases = [
 		icon: <FaCookieBite className="text-orange-500" />,
 		title: "Cache + cookies",
 		desc: "Przypadkowe cache’owanie użytkownika (wyciek danych)",
-		color: "bg-orange-100 border-orange-400",
+		color: "bg-white border-orange-400 dark:bg-zinc-900 dark:border-orange-500",
 	},
 	{
 		href: "/edge-cases/dynamic-price",
-		icon: <FaMoneyBillWave className="text-green-500" />,
+		icon: <FaMoneyBillWave className="text-green-600" />,
 		title: "Cache + dynamiczne ceny",
 		desc: "Nieaktualne ceny przez brak revalidate",
-		color: "bg-green-100 border-green-400",
-	},
-	{
-		href: "/edge-cases/headers",
-		icon: <FaGlobeEurope className="text-blue-500" />,
-		title: "Cache + headers",
-		desc: "Globalny cache dla nagłówków (np. kraj)",
-		color: "bg-blue-100 border-blue-400",
+		color: "bg-white border-green-500 dark:bg-zinc-900 dark:border-green-600",
 	},
 ];
+
+const examplePage = {
+	href: "/example",
+	icon: <FaUserSecret className="text-purple-600" />,
+	title: "Example: Rick & Morty Gallery",
+	desc: "Galeria bohaterów z API + licznik followersów z Githuba",
+	color: "bg-white border-purple-500 dark:bg-zinc-900 dark:border-purple-600",
+};
 
 export default function Home() {
 	return (
@@ -41,22 +42,39 @@ export default function Home() {
 					{edgeCases.map((ec) => (
 						<li
 							key={ec.href}
-							className={`border rounded-xl p-6 flex items-center gap-4 shadow-sm transition hover:scale-105 hover:bg-white dark:hover:bg-zinc-800 ${ec.color}`}
+							className={`border rounded-xl p-6 flex items-center gap-4 shadow-sm transition hover:scale-105 hover:bg-zinc-100 dark:hover:bg-zinc-800 ${ec.color}`}
 						>
 							<span className="text-3xl mr-2">{ec.icon}</span>
 							<div className="flex flex-col">
 								<Link
 									href={ec.href}
-									className="text-lg font-semibold text-black dark:text-zinc-50 hover:underline"
+									className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 hover:underline"
 								>
 									{ec.title}
 								</Link>
-								<span className="text-sm text-zinc-600 dark:text-zinc-300 mt-1">
+								<span className="text-sm text-zinc-700 dark:text-zinc-300 mt-1">
 									{ec.desc}
 								</span>
 							</div>
 						</li>
 					))}
+					<li
+						key={examplePage.href}
+						className={`border rounded-xl p-6 flex items-center gap-4 shadow-sm transition hover:scale-105 hover:bg-zinc-100 dark:hover:bg-zinc-800 ${examplePage.color}`}
+					>
+						<span className="text-3xl mr-2">{examplePage.icon}</span>
+						<div className="flex flex-col">
+							<Link
+								href={examplePage.href}
+								className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 hover:underline"
+							>
+								{examplePage.title}
+							</Link>
+							<span className="text-sm text-zinc-700 dark:text-zinc-300 mt-1">
+								{examplePage.desc}
+							</span>
+						</div>
+					</li>
 				</ul>
 				<div className="mt-12 text-center text-xs text-zinc-400 dark:text-zinc-500">
 					<Suspense fallback={null}>

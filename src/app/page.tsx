@@ -33,12 +33,26 @@ export default function Home() {
 		<div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-zinc-50 to-blue-100 dark:from-black dark:to-zinc-900 font-sans">
 			<main className="flex flex-col items-center w-full max-w-4xl py-24 px-6">
 				<h1 className="text-4xl font-bold mb-8 text-center text-black dark:text-zinc-50 drop-shadow">
-					Edge-case'y Cache Components w Next.js
+					Cache Components w Next.js
 				</h1>
-				<p className="mb-8 text-lg text-zinc-700 dark:text-zinc-300 text-center max-w-xl">
-					Wybierz edge-case, aby zobaczyć interaktywny przykład i wyjaśnienie.
-				</p>
 				<ul className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+					<li
+						key={examplePage.href}
+						className={`border rounded-xl p-6 flex items-center gap-4 shadow-sm transition hover:scale-105 hover:bg-zinc-100 dark:hover:bg-zinc-800 ${examplePage.color}`}
+					>
+						<span className="text-3xl mr-2">{examplePage.icon}</span>
+						<div className="flex flex-col">
+							<Link
+								href={examplePage.href}
+								className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 hover:underline"
+							>
+								{examplePage.title}
+							</Link>
+							<span className="text-sm text-zinc-700 dark:text-zinc-300 mt-1">
+								{examplePage.desc}
+							</span>
+						</div>
+					</li>
 					{edgeCases.map((ec) => (
 						<li
 							key={ec.href}
@@ -58,23 +72,7 @@ export default function Home() {
 							</div>
 						</li>
 					))}
-					<li
-						key={examplePage.href}
-						className={`border rounded-xl p-6 flex items-center gap-4 shadow-sm transition hover:scale-105 hover:bg-zinc-100 dark:hover:bg-zinc-800 ${examplePage.color}`}
-					>
-						<span className="text-3xl mr-2">{examplePage.icon}</span>
-						<div className="flex flex-col">
-							<Link
-								href={examplePage.href}
-								className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 hover:underline"
-							>
-								{examplePage.title}
-							</Link>
-							<span className="text-sm text-zinc-700 dark:text-zinc-300 mt-1">
-								{examplePage.desc}
-							</span>
-						</div>
-					</li>
+
 				</ul>
 				<div className="mt-12 text-center text-xs text-zinc-400 dark:text-zinc-500">
 					<Suspense fallback={null}>

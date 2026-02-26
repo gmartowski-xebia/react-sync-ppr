@@ -1,8 +1,8 @@
-let price = 100;
+"use cache";
+import { cacheTag } from "next/cache";
+import { getPrice } from "./priceStore";
+
 export async function ProductGood() {
-  // "use cache";
-  return <div>Cena produktu (z revalidate): {price} zł</div>;
-}
-export function setPrice(newPrice: number) {
-  price = newPrice;
+  cacheTag("product-1");
+  return <div>Cena produktu (z revalidate): {getPrice()} zł</div>;
 }

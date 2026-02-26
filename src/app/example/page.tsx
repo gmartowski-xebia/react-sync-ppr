@@ -1,6 +1,5 @@
 import Navbar from "@/app/example/navbar";
 import RickAndMortyGallery from "@/app/example/rickandmorty-gallery";
-import RickAndMortyGallerySkeleton from "@/app/example/rickandmorty-gallery-skeleton";
 
 export default function ExamplePage() {
   return (
